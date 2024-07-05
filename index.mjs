@@ -2,6 +2,10 @@ import express from 'express';
 import json_file_object from 'json-file-object';
 import k from 'k';
 import { encodeCodeToString, fingerprint } from 'k/fingerprint.mjs'
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const schemas = json_file_object({file:'schemas.json'});
 const rels_by_dom = json_file_object({file:'rels-by-dom.json'});
@@ -10,11 +14,10 @@ const rels_by_img = json_file_object({file:'rels-by-img.json'});
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-
-const body_as_string = express.text();
+const bodyText = express.text();
 
 // Endpoint to store a schema
-app.post('/script', body_as_string, (req, res) => {
+app.post('/k', bodyText, (req, res) => {
   const script = req.body;
   const annotated = k.annotate(script);
 
@@ -49,21 +52,25 @@ app.post('/script', body_as_string, (req, res) => {
 });
 
 // Endpoint to retrieve a schema
-app.get('/schema/:name', (req, res) => {
-    const schemaName = req.params.name;
-    const schema = schemas[schemaName];
+app.get('/q', (req, res) => {
+  const schemaName = req.query.schema;
+  const schema = schemas[schemaName];
 
-    if (!schema) {
-        return res.status(404).json({ error: 'Schema not found' });
-    }
+  if (!schema) {
+      return res.status(404).json({ error: 'Schema not found' });
+  }
 
-    res.status(200).json({ id: schemaName, spec: schema});
+  res.status(200).json({ id: schemaName, spec: schema});
 });
 
 app.get('/all', (req, res) => {
-    res.status(200).json(schemas);
+  res.status(200).json(schemas);
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname,'html/index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
