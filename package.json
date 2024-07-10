@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +13,18 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
+    "http-server": "^14.1.1",
     "json-file-object": "^2.0.4",
-    "k": "git+https://github.com/fraczak/k.git#code-patterns"
+    "k": "git+https://github.com/fraczak/k.git#code-patterns",
+    "process": "^0.11.10"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.7",
+    "assert": "^2.1.0",
+    "rollup": "^4.18.1",
+    "rollup-plugin-polyfill-node": "^0.13.0"
   }
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FSR</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <h1>Local console</h1>
+  <textarea id="code-input" class="code-input" placeholder="Type your code here..."></textarea>
+  <button id="execute-btn" onclick="evaluateText()">Run</button>
+  <pre id="output" class="output"></pre>
+  
+  <div>
+      <textarea id="textInput" class="code-input"></textarea>
+  </div>
+  <button onclick="submitText()">Submit</button>
+  <div id="responseOutput"></div>
+  <div>
+      <input type="text" id="schemaInput" placeholder="Enter schema">
+  </div>
+  <button onclick="getSchema()">Submit</button>
+  <pre id="responseOutput2" class="output" ></pre>
+  <script src="js/bundle.js"></script>
+  <script src="js/main.js"></script>
+
+  
+</body>
+</html>
